@@ -1,0 +1,1 @@
+# query_in_all_oracle_db
