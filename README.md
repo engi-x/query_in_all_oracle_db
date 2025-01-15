@@ -2,7 +2,7 @@
 
 ## Description
 
-This script, created by **Alengi Benzant** on **November 28, 2024**, is designed to execute SQL queries across multiple Oracle databases simultaneously or individually. It also allows for database management, such as starting up or shutting down databases as needed.
+This script is designed to execute SQL queries across multiple Oracle databases simultaneously or individually. It also allows for database management, such as starting up or shutting down databases as needed.
 
 ## Features
 
