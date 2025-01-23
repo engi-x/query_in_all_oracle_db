@@ -53,8 +53,6 @@ execute_query_in_all_db() {
 		INSTANCES=$(ls $ORACLE_HOME/dbs/spfile* | awk -F'spfile|.ora' '{print $3}')
 		for instance in $INSTANCES
 		do
-            #borra el archivo lkCBDB para evitar el error de instancia exclusiva
-			rm -rf $ORACLE_HOME/dbs/lkCBDB
 			export ORACLE_SID=$instance
 			sqlplus / as sysdba<<EOF
 			$query
