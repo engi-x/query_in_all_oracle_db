@@ -49,10 +49,12 @@ execute_query_in_all_db() {
 	#si la variable $query es igual a "startup" inicia las instancias.
 	if [ "$(echo "$query" | tr '[:upper:]' '[:lower:]')" = "startup" ];
 	then		
-		#toma los nombres de las instancias de los archivos $ORACLE_HOME/dbs/hc_XXX.dat para subir las instancias. 
-		INSTANCES=$(ls $ORACLE_HOME/dbs/hc_* | grep -v hc_ARCHIVELOG.dat | awk -F'hc_|.dat' '{print $2}')
+		#toma los nombres de las instancias de los archivos $ORACLE_HOME/dbs/spfileXXX.dat para subir las instancias. 
+		INSTANCES=$(ls $ORACLE_HOME/dbs/spfile* | awk -F'spfile|.ora' '{print $3}')
 		for instance in $INSTANCES
 		do
+            #borra el archivo lkCBDB para evitar el error de instancia exclusiva
+			rm -rf $ORACLE_HOME/dbs/lkCBDB
 			export ORACLE_SID=$instance
 			sqlplus / as sysdba<<EOF
 			$query
@@ -93,6 +95,8 @@ execute_query_per_db() {
 	then		 				
 		for instance in $INSTANCES
 		do
+            #borra el archivo lkCBDB para evitar el error de instancia exclusiva
+			rm -rf $ORACLE_HOME/dbs/lkCBDB
 			export ORACLE_SID=$instance
 			sqlplus / as sysdba<<EOF
 			$query
